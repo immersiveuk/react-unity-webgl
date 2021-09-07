@@ -143,4 +143,16 @@ export class UnityContext {
     if (typeof this.unityInstance !== "undefined")
       this.unityInstance.SetFullscreen(enabled === true ? 1 : 0);
   }
+
+  /**
+   * Takes a screenshot and returns it as a base64 encoded string.
+   * @public
+   * @param {string} mimeType the mime type of the screenshot.
+   * @param {number} quality the quality of the screenshot.
+   */
+  public captureScreenshot(mimeType?: string, quality?: number): string {
+    // if (typeof this.unityInstance !== "undefined")
+    //   this.
+    // return "";
+  }
 }
