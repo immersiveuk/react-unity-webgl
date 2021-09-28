@@ -30,9 +30,20 @@ export class UnityLoaderService {
    */
   public async addFromUrl(url: string): Promise<void> {
     let _hasSimilarUnityLoaderUrlInstance = false;
+    let remove = [];
     for (let _unityLoaderInstance of UnityLoaderService.unityLoaderInstances)
-      if (_unityLoaderInstance.url === url)
-        _hasSimilarUnityLoaderUrlInstance = true;
+    {
+        if (_unityLoaderInstance.url === url)
+        {
+          remove.push(_unityLoaderInstance);
+        }
+    }
+
+    for (let _unityLoaderInstance of remove) {
+      this.documentHead?.removeChild(_unityLoaderInstance.htmlScriptElement);
+      UnityLoaderService.unityLoaderInstances.splice(UnityLoaderService.unityLoaderInstances.indexOf(_unityLoaderInstance));
+  }
+
     if (_hasSimilarUnityLoaderUrlInstance === false) {
       const _htmlScriptElement = await this.appendAndLoadScript(url);
       UnityLoaderService.unityLoaderInstances.push({
